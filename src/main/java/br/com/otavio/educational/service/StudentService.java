@@ -30,7 +30,11 @@ public class StudentService {
 
     public void updateStudent(StudentDto studentDto, Integer id) {
         StudentDto verifyStudentDto = findById(id);
-        verifyEmail(studentDto);
+
+        if(!verifyStudentDto.getEmail().equals(studentDto.getEmail())){
+            verifyEmail(studentDto);
+        }
+
         StudentModel studentModel = convertDtoToModel(studentDto);
         studentModel.setId(id);
         studentRepository.save(studentModel);
