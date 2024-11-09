@@ -38,7 +38,7 @@ public class StudentService {
 
     public StudentDto findById (Integer id) {
         StudentModel studentModel = studentRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Id not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Id não foi encontrado"));
 
         return convertModelToDto(studentModel);
     }
@@ -65,7 +65,7 @@ public class StudentService {
         Optional<StudentModel> optionalStudentModel = studentRepository.findByEmail(studentDto.getEmail());
 
         if(optionalStudentModel.isPresent()){
-            throw new ResourceEmailAlreadyExistsException("There is a student with this email");
+            throw new ResourceEmailAlreadyExistsException("Já existe um aluno com teste email");
         }
     }
 

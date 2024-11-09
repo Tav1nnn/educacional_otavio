@@ -1,21 +1,30 @@
 package br.com.otavio.educational.dto;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.validation.constraints.*;
 
 import java.util.Date;
 
 public class StudentDto {
 
-    @NotBlank(message = "name field cannot be null")
+    @JsonProperty("nome")
+    @NotBlank(message = "campo nome não pode ser nulo")
     private String name;
-    @NotBlank(message = "email field cannot be null")
-    @Email(message = "this field needs to be an email")
+
+    @NotBlank(message = "campo email não pode ser nulo")
+    @Email(message = "o campo precisa ser preenchido com um email")
     private String email;
-    @NotBlank(message = "registration field cannot be null")
+
+    @JsonProperty("matricula")
+    @NotBlank(message = "campo matricula não pode ser nula")
     private String registration;
-    @NotNull(message = "dateBirth field cannot be null")
-    @PastOrPresent(message = "the date cannot be in the future")
+
+    @JsonProperty("data_nascimento")
+    @NotNull(message = "campo data_nascimento não pode ser nulo")
+    @PastOrPresent(message = "data_nascimento não pode ser uma data futura")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date dateBirth;
 
     public StudentDto() {

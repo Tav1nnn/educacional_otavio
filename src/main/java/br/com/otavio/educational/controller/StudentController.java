@@ -19,14 +19,12 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    // CREATE - Criar um novo estudante
     @PostMapping
     public ResponseEntity<StudentDto> createStudent(@RequestBody @Valid StudentDto studentDto) {
         studentService.createStudent(studentDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(studentDto);
     }
 
-    // READ - Listar todos os estudantes
     @GetMapping
     public ResponseEntity<List<StudentDto>> findAllStudents() {
         List<StudentDto> students = studentService.findAll();
@@ -40,7 +38,6 @@ public class StudentController {
         return ResponseEntity.ok(student);
     }
 
-    // UPDATE - Atualizar um estudante
     @PutMapping("/{id}")
     public ResponseEntity<StudentDto> updateStudent(@PathVariable Integer id, @RequestBody @Valid StudentDto studentDto) {
         studentService.updateStudent(studentDto, id);
