@@ -31,7 +31,6 @@ public class StudentController {
         return ResponseEntity.ok(students);
     }
 
-    // READ - Buscar um estudante pelo ID
     @GetMapping("/{id}")
     public ResponseEntity<StudentDto> findStudentById(@PathVariable Integer id) {
         StudentDto student = studentService.findById(id);

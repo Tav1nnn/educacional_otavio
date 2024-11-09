@@ -20,33 +20,32 @@ public class ProfessorController {
     }
 
     @PostMapping
-    public ResponseEntity<ProfessorDto> createStudent(@RequestBody @Valid ProfessorDto professorDto) {
-        professorService.createStudent(professorDto);
+    public ResponseEntity<ProfessorDto> createProfessor(@RequestBody @Valid ProfessorDto professorDto) {
+        professorService.createProfessor(professorDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping
-    public ResponseEntity<List<ProfessorDto>> findAllStudents() {
+    public ResponseEntity<List<ProfessorDto>> findAllProfessors() {
         List<ProfessorDto> students = professorService.findAll();
         return ResponseEntity.ok(students);
     }
 
-    // READ - Buscar um estudante pelo ID
     @GetMapping("/{id}")
-    public ResponseEntity<ProfessorDto> findStudentById(@PathVariable Integer id) {
+    public ResponseEntity<ProfessorDto> findProfessorById(@PathVariable Integer id) {
         ProfessorDto student = professorService.findById(id);
         return ResponseEntity.ok(student);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProfessorDto> updateStudent(@PathVariable Integer id, @RequestBody @Valid ProfessorDto professorDto) {
-        professorService.updateStudent(professorDto, id);
+    public ResponseEntity<ProfessorDto> updateProfessor(@PathVariable Integer id, @RequestBody @Valid ProfessorDto professorDto) {
+        professorService.updateProfessor(professorDto, id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteStudent(@PathVariable Integer id) {
-        professorService.deleteStudent(id);
+    public ResponseEntity<Void> deleteProfessor(@PathVariable Integer id) {
+        professorService.deleteProfessor(id);
         return ResponseEntity.noContent().build();
     }
 }

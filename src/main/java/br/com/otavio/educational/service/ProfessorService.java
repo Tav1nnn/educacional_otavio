@@ -20,7 +20,7 @@ public class ProfessorService {
         this.professorRepository = professorRepository;
     }
 
-    public void createStudent(ProfessorDto professorDto) {
+    public void createProfessor(ProfessorDto professorDto) {
         verifyEmail(professorDto);
 
         ProfessorModel professorModel = convertDtoToModel(professorDto);
@@ -28,7 +28,7 @@ public class ProfessorService {
         professorRepository.save(professorModel);
     }
 
-    public void updateStudent(ProfessorDto professorDto, Integer id) {
+    public void updateProfessor(ProfessorDto professorDto, Integer id) {
         ProfessorDto verifyProfessorDto = findById(id);
 
         if(!verifyProfessorDto.getEmail().equals(professorDto.getEmail())){
@@ -58,7 +58,7 @@ public class ProfessorService {
         return lstProfessorDto;
     }
 
-    public void deleteStudent(Integer id) {
+    public void deleteProfessor(Integer id) {
         ProfessorDto verifyProfessorDto = findById(id);
         ProfessorModel professorModel = convertDtoToModel(verifyProfessorDto);
         professorModel.setId(id);
