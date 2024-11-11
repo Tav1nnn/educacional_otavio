@@ -61,6 +61,7 @@ public class CourseService {
 
     private CourseModel convertDtoToModel(CourseDto courseDto) {
         CourseModel courseModel = new CourseModel();
+        courseModel.setId(courseDto.getId() != null ? courseDto.getId() : null);
         courseModel.setName(courseDto.getName());
         courseModel.setCode(courseDto.getCode());
         courseModel.setWorkload(courseDto.getWorkload());
@@ -70,6 +71,7 @@ public class CourseService {
 
     private CourseDto convertModelToDto(CourseModel courseModel) {
         CourseDto courseDto = new CourseDto();
+        courseDto.setId(courseModel.getId() != null ? courseModel.getId() : null);
         courseDto.setName(courseModel.getName());
         courseDto.setCode(courseModel.getCode());
         courseDto.setWorkload(courseModel.getWorkload());

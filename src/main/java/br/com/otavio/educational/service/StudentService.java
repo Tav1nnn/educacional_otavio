@@ -75,6 +75,7 @@ public class StudentService {
 
     private StudentModel convertDtoToModel(StudentDto studentDto) {
         StudentModel studentModel = new StudentModel();
+        studentModel.setId(studentDto.getId() != null ? studentDto.getId() : null);
         studentModel.setName(studentDto.getName());
         studentModel.setEmail(studentDto.getEmail());
         studentModel.setRegistration(studentDto.getRegistration());
@@ -85,6 +86,7 @@ public class StudentService {
 
     private StudentDto convertModelToDto(StudentModel studentModel) {
         StudentDto studentDto = new StudentDto();
+        studentDto.setId(studentModel.getId() != null ? studentModel.getId() : null);
         studentDto.setName(studentModel.getName());
         studentDto.setEmail(studentModel.getEmail());
         studentDto.setRegistration(studentModel.getRegistration());

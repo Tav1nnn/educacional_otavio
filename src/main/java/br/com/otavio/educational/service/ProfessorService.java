@@ -75,6 +75,7 @@ public class ProfessorService {
 
     private ProfessorModel convertDtoToModel(ProfessorDto professorDto) {
         ProfessorModel professorModel = new ProfessorModel();
+        professorModel.setId(professorDto.getId() != null ? professorDto.getId() : null);
         professorModel.setName(professorDto.getName());
         professorModel.setEmail(professorDto.getEmail());
         professorModel.setPhone(professorDto.getPhone());
@@ -85,6 +86,7 @@ public class ProfessorService {
 
     private ProfessorDto convertModelToDto(ProfessorModel professorModel) {
         ProfessorDto professorDto = new ProfessorDto();
+        professorDto.setId(professorModel.getId() != null ? professorModel.getId() : null);
         professorDto.setName(professorModel.getName());
         professorDto.setEmail(professorModel.getEmail());
         professorDto.setPhone(professorModel.getPhone());

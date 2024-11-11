@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotNull;
 
 public class CourseDto {
 
+    private Integer id;
+
     @JsonProperty("nome")
     @NotBlank(message = "campo nome não pode ser nulo")
     private String name;
@@ -20,6 +22,14 @@ public class CourseDto {
 
     public CourseDto() {
 
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {

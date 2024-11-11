@@ -11,6 +11,8 @@ import java.util.Date;
 
 public class ProfessorDto {
 
+    private Integer id;
+
     @JsonProperty("nome")
     @NotBlank(message = "campo nome não pode ser nulo")
     private String name;
@@ -29,6 +31,14 @@ public class ProfessorDto {
 
     public ProfessorDto() {
 
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
