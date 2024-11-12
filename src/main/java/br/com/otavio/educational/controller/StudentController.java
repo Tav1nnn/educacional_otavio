@@ -22,7 +22,7 @@ public class StudentController {
     @PostMapping
     public ResponseEntity<StudentDto> createStudent(@RequestBody @Valid StudentDto studentDto) {
         studentService.createStudent(studentDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(studentDto);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping
@@ -40,7 +40,7 @@ public class StudentController {
     @PutMapping("/{id}")
     public ResponseEntity<StudentDto> updateStudent(@PathVariable Integer id, @RequestBody @Valid StudentDto studentDto) {
         studentService.updateStudent(studentDto, id);
-        return ResponseEntity.ok(studentDto);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @DeleteMapping("/{id}")

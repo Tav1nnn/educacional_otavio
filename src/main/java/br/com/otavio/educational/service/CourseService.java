@@ -22,14 +22,14 @@ public class CourseService {
 
     public void createCourse(CourseDto courseDto) {
 
-        CourseModel courseModel = convertDtoToModel(courseDto);
+        CourseModel courseModel = CONVERT_DTO_TO_MODEL(courseDto);
 
         courseRepository.save(courseModel);
     }
 
     public void updateCourse(CourseDto courseDto, Integer id) {
         
-        CourseModel courseModel = convertDtoToModel(courseDto);
+        CourseModel courseModel = CONVERT_DTO_TO_MODEL(courseDto);
         courseModel.setId(id);
         courseRepository.save(courseModel);
     }
@@ -38,7 +38,7 @@ public class CourseService {
         CourseModel courseModel = courseRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Id não foi encontrado"));
 
-        return convertModelToDto(courseModel);
+        return CONVERT_MODEL_TO_DTO(courseModel);
     }
 
     public List<CourseDto> findAll () {
@@ -46,7 +46,7 @@ public class CourseService {
         List<CourseDto> lstCourseDto = new ArrayList<>();
 
         for(CourseModel courseModel : lstCourseModel) {
-            lstCourseDto.add(convertModelToDto(courseModel));
+            lstCourseDto.add(CONVERT_MODEL_TO_DTO(courseModel));
         }
 
         return lstCourseDto;
@@ -54,12 +54,12 @@ public class CourseService {
 
     public void deleteCourse(Integer id) {
         CourseDto verifyCourseDto = findById(id);
-        CourseModel courseModel = convertDtoToModel(verifyCourseDto);
+        CourseModel courseModel = CONVERT_DTO_TO_MODEL(verifyCourseDto);
         courseModel.setId(id);
         courseRepository.delete(courseModel);
     }
 
-    private CourseModel convertDtoToModel(CourseDto courseDto) {
+    public static CourseModel CONVERT_DTO_TO_MODEL(CourseDto courseDto) {
         CourseModel courseModel = new CourseModel();
         courseModel.setId(courseDto.getId() != null ? courseDto.getId() : null);
         courseModel.setName(courseDto.getName());
@@ -69,7 +69,7 @@ public class CourseService {
         return courseModel;
     }
 
-    private CourseDto convertModelToDto(CourseModel courseModel) {
+    public static CourseDto CONVERT_MODEL_TO_DTO(CourseModel courseModel) {
         CourseDto courseDto = new CourseDto();
         courseDto.setId(courseModel.getId() != null ? courseModel.getId() : null);
         courseDto.setName(courseModel.getName());
