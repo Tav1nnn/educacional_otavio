@@ -8,4 +8,6 @@ import java.util.Optional;
 
 public interface CourseRepository extends JpaRepository<CourseModel, Integer> {
 
+    Optional<CourseModel> findByCode (String code);
+
 }

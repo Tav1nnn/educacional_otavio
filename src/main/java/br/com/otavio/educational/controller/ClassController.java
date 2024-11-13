@@ -23,7 +23,7 @@ public class ClassController {
     @PostMapping
     public ResponseEntity<ClassDto> createClass(@RequestBody @Valid ClassDto classDto) {
         classService.createClass(classDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(classDto);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping

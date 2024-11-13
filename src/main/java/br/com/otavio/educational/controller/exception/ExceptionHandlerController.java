@@ -2,6 +2,7 @@ package br.com.otavio.educational.controller.exception;
 
 import br.com.otavio.educational.controller.exception.model.StandardError;
 import br.com.otavio.educational.controller.exception.model.ValidationError;
+import br.com.otavio.educational.service.exception.ResourceCodeAlreadyExistsException;
 import br.com.otavio.educational.service.exception.ResourceEmailAlreadyExistsException;
 import br.com.otavio.educational.service.exception.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -49,6 +50,20 @@ public class ExceptionHandlerController {
     @ExceptionHandler(ResourceEmailAlreadyExistsException.class)
     public ResponseEntity<StandardError>
     resourceNotFoundException (ResourceEmailAlreadyExistsException e, HttpServletRequest request) {
+        StandardError err = new StandardError();
+
+        err.setTimestamp(Instant.now());
+        err.setStatus(HttpStatus.CONFLICT.value());
+        err.setError("Email already exists");
+        err.setMessage(e.getMessage());
+        err.setPath(request.getRequestURI());
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(err);
+    }
+
+    @ExceptionHandler(ResourceCodeAlreadyExistsException.class)
+    public ResponseEntity<StandardError>
+    resourceNotFoundException (ResourceCodeAlreadyExistsException e, HttpServletRequest request) {
         StandardError err = new StandardError();
 
         err.setTimestamp(Instant.now());

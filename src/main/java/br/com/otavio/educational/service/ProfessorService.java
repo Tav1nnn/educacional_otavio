@@ -23,7 +23,7 @@ public class ProfessorService {
     public void createProfessor(ProfessorDto professorDto) {
         verifyEmail(professorDto);
 
-        ProfessorModel professorModel = convertDtoToModel(professorDto);
+        ProfessorModel professorModel = COVERT_DTO_TO_MODEL(professorDto);
 
         professorRepository.save(professorModel);
     }
@@ -35,7 +35,7 @@ public class ProfessorService {
             verifyEmail(professorDto);
         }
         
-        ProfessorModel professorModel = convertDtoToModel(professorDto);
+        ProfessorModel professorModel = COVERT_DTO_TO_MODEL(professorDto);
         professorModel.setId(id);
         professorRepository.save(professorModel);
     }
@@ -44,7 +44,7 @@ public class ProfessorService {
         ProfessorModel professorModel = professorRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Id não foi encontrado"));
 
-        return convertModelToDto(professorModel);
+        return COVERT_MODEL_TO_DTO(professorModel);
     }
 
     public List<ProfessorDto> findAll () {
@@ -52,7 +52,7 @@ public class ProfessorService {
         List<ProfessorDto> lstProfessorDto = new ArrayList<>();
 
         for(ProfessorModel professorModel : lstProfessorModel) {
-            lstProfessorDto.add(convertModelToDto(professorModel));
+            lstProfessorDto.add(COVERT_MODEL_TO_DTO(professorModel));
         }
 
         return lstProfessorDto;
@@ -60,7 +60,7 @@ public class ProfessorService {
 
     public void deleteProfessor(Integer id) {
         ProfessorDto verifyProfessorDto = findById(id);
-        ProfessorModel professorModel = convertDtoToModel(verifyProfessorDto);
+        ProfessorModel professorModel = COVERT_DTO_TO_MODEL(verifyProfessorDto);
         professorModel.setId(id);
         professorRepository.delete(professorModel);
     }
@@ -73,7 +73,7 @@ public class ProfessorService {
         }
     }
 
-    private ProfessorModel convertDtoToModel(ProfessorDto professorDto) {
+    public static ProfessorModel COVERT_DTO_TO_MODEL(ProfessorDto professorDto) {
         ProfessorModel professorModel = new ProfessorModel();
         professorModel.setId(professorDto.getId() != null ? professorDto.getId() : null);
         professorModel.setName(professorDto.getName());
@@ -84,7 +84,7 @@ public class ProfessorService {
         return professorModel;
     }
 
-    private ProfessorDto convertModelToDto(ProfessorModel professorModel) {
+    public static ProfessorDto COVERT_MODEL_TO_DTO(ProfessorModel professorModel) {
         ProfessorDto professorDto = new ProfessorDto();
         professorDto.setId(professorModel.getId() != null ? professorModel.getId() : null);
         professorDto.setName(professorModel.getName());
