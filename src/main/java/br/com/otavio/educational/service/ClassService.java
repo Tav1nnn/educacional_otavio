@@ -30,7 +30,7 @@ public class ClassService {
 
         classDto.setCourseDto(courseDto);
 
-        ClassModel classModel = convertDtoToModel(classDto);
+        ClassModel classModel = CONVERT_DTO_TO_MODEL(classDto);
 
         classRepository.save(classModel);
     }
@@ -41,7 +41,7 @@ public class ClassService {
 
         classDto.setCourseDto(courseDto);
 
-        ClassModel classModel = convertDtoToModel(classDto);
+        ClassModel classModel = CONVERT_DTO_TO_MODEL(classDto);
         classModel.setId(id);
         classRepository.save(classModel);
     }
@@ -50,7 +50,7 @@ public class ClassService {
         ClassModel classModel = classRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Id não foi encontrado"));
 
-        return convertModelToDto(classModel);
+        return CONVERT_MODEL_TO_DTO(classModel);
     }
 
     public Set<ClassDto> searchClass (Integer year, Integer semester, Integer courseId) {
@@ -58,7 +58,7 @@ public class ClassService {
         Set<ClassDto> lstClassDto = new HashSet<>();
 
         for(ClassModel classModel : lstClassModel) {
-            lstClassDto.add(convertModelToDto(classModel));
+            lstClassDto.add(CONVERT_MODEL_TO_DTO(classModel));
         }
 
         return lstClassDto;
@@ -66,7 +66,7 @@ public class ClassService {
 
     public void deleteClass(Integer id) {
         ClassDto verifyClassDto = findById(id);
-        ClassModel classModel = convertDtoToModel(verifyClassDto);
+        ClassModel classModel = CONVERT_DTO_TO_MODEL(verifyClassDto);
         classModel.setId(id);
         classRepository.delete(classModel);
     }
@@ -81,7 +81,7 @@ public class ClassService {
         return courseDto;
     }
 
-    private ClassModel convertDtoToModel(ClassDto classDto) {
+    public static ClassModel CONVERT_DTO_TO_MODEL(ClassDto classDto) {
         ClassModel classModel = new ClassModel();
         classModel.setId(classDto.getId() != null ? classDto.getId() : null);
         classModel.setYear(classDto.getYear());
@@ -91,7 +91,7 @@ public class ClassService {
         return classModel;
     }
 
-    private ClassDto convertModelToDto(ClassModel classModel) {
+    public static ClassDto CONVERT_MODEL_TO_DTO(ClassModel classModel) {
         ClassDto classDto = new ClassDto();
         classDto.setId(classModel.getId() != null ? classModel.getId() : null);
         classDto.setYear(classModel.getYear());

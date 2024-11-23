@@ -23,7 +23,7 @@ public class StudentService {
     public void createStudent(StudentDto studentDto) {
         verifyEmail(studentDto);
 
-        StudentModel studentModel = convertDtoToModel(studentDto);
+        StudentModel studentModel = CONVERT_DTO_TO_MODEL(studentDto);
 
         studentRepository.save(studentModel);
     }
@@ -35,7 +35,7 @@ public class StudentService {
             verifyEmail(studentDto);
         }
 
-        StudentModel studentModel = convertDtoToModel(studentDto);
+        StudentModel studentModel = CONVERT_DTO_TO_MODEL(studentDto);
         studentModel.setId(id);
         studentRepository.save(studentModel);
     }
@@ -44,7 +44,7 @@ public class StudentService {
         StudentModel studentModel = studentRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Id não foi encontrado"));
 
-        return convertModelToDto(studentModel);
+        return CONVERT_MODEL_TO_DTO(studentModel);
     }
 
     public List<StudentDto> findAll () {
@@ -52,7 +52,7 @@ public class StudentService {
         List<StudentDto> lstStudentDto = new ArrayList<>();
 
         for(StudentModel studentModel : lstStudentModel) {
-            lstStudentDto.add(convertModelToDto(studentModel));
+            lstStudentDto.add(CONVERT_MODEL_TO_DTO(studentModel));
         }
 
         return lstStudentDto;
@@ -60,7 +60,7 @@ public class StudentService {
 
     public void deleteStudent(Integer id) {
         StudentDto verifyStudentDto = findById(id);
-        StudentModel studentModel = convertDtoToModel(verifyStudentDto);
+        StudentModel studentModel = CONVERT_DTO_TO_MODEL(verifyStudentDto);
         studentModel.setId(id);
         studentRepository.delete(studentModel);
     }
@@ -73,7 +73,7 @@ public class StudentService {
         }
     }
 
-    private StudentModel convertDtoToModel(StudentDto studentDto) {
+    public static StudentModel CONVERT_DTO_TO_MODEL(StudentDto studentDto) {
         StudentModel studentModel = new StudentModel();
         studentModel.setId(studentDto.getId() != null ? studentDto.getId() : null);
         studentModel.setName(studentDto.getName());
@@ -84,7 +84,7 @@ public class StudentService {
         return studentModel;
     }
 
-    private StudentDto convertModelToDto(StudentModel studentModel) {
+    public static StudentDto CONVERT_MODEL_TO_DTO (StudentModel studentModel) {
         StudentDto studentDto = new StudentDto();
         studentDto.setId(studentModel.getId() != null ? studentModel.getId() : null);
         studentDto.setName(studentModel.getName());
