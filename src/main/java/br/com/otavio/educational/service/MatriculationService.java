@@ -124,7 +124,7 @@ public class MatriculationService {
         return matriculationModel;
     }
 
-    private MatriculationDto CONVERT_MODEL_TO_DTO(MatriculationModel matriculationModel) {
+    public static MatriculationDto CONVERT_MODEL_TO_DTO(MatriculationModel matriculationModel) {
         MatriculationDto matriculationDto = new MatriculationDto();
         matriculationDto.setId(matriculationModel.getId() != null ? matriculationModel.getId() : null);
         matriculationDto.setStudentId(matriculationModel.getStudentModel().getId() != null ? matriculationModel.getStudentModel().getId() : null);

@@ -38,7 +38,7 @@ public class DisciplineService {
         disciplineDto.setCourseDto(courseDto);
         disciplineDto.setProfessorDto(professorDto);
 
-        DisciplineModel disciplineModel = convertDtoToModel(disciplineDto);
+        DisciplineModel disciplineModel = CONVERT_DTO_TO_MODEL(disciplineDto);
 
         disciplineRepository.save(disciplineModel);
     }
@@ -57,7 +57,7 @@ public class DisciplineService {
         disciplineDto.setCourseDto(courseDto);
         disciplineDto.setProfessorDto(professorDto);
 
-        DisciplineModel disciplineModel = convertDtoToModel(disciplineDto);
+        DisciplineModel disciplineModel = CONVERT_DTO_TO_MODEL(disciplineDto);
         disciplineModel.setId(id);
         disciplineRepository.save(disciplineModel);
     }
@@ -66,7 +66,7 @@ public class DisciplineService {
         DisciplineModel disciplineModel = disciplineRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Id não foi encontrado"));
 
-        return convertModelToDto(disciplineModel);
+        return CONVERT_MODEL_TO_DTO(disciplineModel);
     }
 
     public Set<DisciplineDto> findAll () {
@@ -74,7 +74,7 @@ public class DisciplineService {
         Set<DisciplineDto> lstDisciplineDto = new HashSet<>();
 
         for(DisciplineModel disciplineModel : lstDisciplineModel) {
-            lstDisciplineDto.add(convertModelToDto(disciplineModel));
+            lstDisciplineDto.add(CONVERT_MODEL_TO_DTO(disciplineModel));
         }
 
         return lstDisciplineDto;
@@ -82,7 +82,7 @@ public class DisciplineService {
 
     public void deleteDiscipline(Integer id) {
         DisciplineDto verifyDisciplineDto = findById(id);
-        DisciplineModel disciplineModel = convertDtoToModel(verifyDisciplineDto);
+        DisciplineModel disciplineModel = CONVERT_DTO_TO_MODEL(verifyDisciplineDto);
         disciplineModel.setId(id);
         disciplineRepository.delete(disciplineModel);
     }
@@ -117,7 +117,7 @@ public class DisciplineService {
         return professorDto;
     }
 
-    private DisciplineModel convertDtoToModel(DisciplineDto disciplineDto) {
+    public static DisciplineModel CONVERT_DTO_TO_MODEL(DisciplineDto disciplineDto) {
         DisciplineModel disciplineModel = new DisciplineModel();
         disciplineModel.setId(disciplineDto.getId() != null ? disciplineDto.getId() : null);
         disciplineModel.setName(disciplineDto.getName());
@@ -128,7 +128,7 @@ public class DisciplineService {
         return disciplineModel;
     }
 
-    private DisciplineDto convertModelToDto(DisciplineModel disciplineModel) {
+    public static DisciplineDto CONVERT_MODEL_TO_DTO(DisciplineModel disciplineModel) {
         DisciplineDto disciplineDto = new DisciplineDto();
         disciplineDto.setId(disciplineModel.getId() != null ? disciplineModel.getId() : null);
         disciplineDto.setName(disciplineModel.getName());
