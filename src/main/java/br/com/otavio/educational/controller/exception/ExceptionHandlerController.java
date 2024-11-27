@@ -54,7 +54,7 @@ public class ExceptionHandlerController {
 
         err.setTimestamp(Instant.now());
         err.setStatus(HttpStatus.CONFLICT.value());
-        err.setError("Email already exists");
+        err.setError("already exists");
         err.setMessage(e.getMessage());
         err.setPath(request.getRequestURI());
 
@@ -68,7 +68,7 @@ public class ExceptionHandlerController {
 
         err.setTimestamp(Instant.now());
         err.setStatus(HttpStatus.CONFLICT.value());
-        err.setError("Email already exists");
+        err.setError("already exists");
         err.setMessage(e.getMessage());
         err.setPath(request.getRequestURI());
 
